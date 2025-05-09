@@ -11,7 +11,7 @@ def webhook():
     if request.method == 'GET':
         token = request.args.get('hub.verify_token')
         challenge = request.args.get('hub.challenge')
-        if token == 'EAAIZBEkh9ymIBOyJGqYlP06nlOLOil5pYJkqcb0aZCKZAwzS2fSMyPdp2fM0qw9Kd4uouYUK3HGyjRZC7Ec0F4Yb0pm2lPOvFcPOawxnvYfDAvkXuVlAso4gITGYZBFjSACNbSYZB4X3yZCM2jyIhoj4ZA0z6mv8ZAZB9S6isdXXZAAGG2zrIc7v0yKBi5ZCK3e8iE564d9Id3v50mRn9tLvAW8EfqoZD':
+        if token == 'EAAIZBEkh9ymIBO26zUZAFG4jsrtQNmI6OTdZBuBJVA1AmoTWd9ZBhZAsSAwm6vc6YIkh7zauOgNRw8TDiBjLsSHIygrsG3vFjb1ZAqzhMM8EfKUyGCKs5Ik9Coj17L0eGZCVxIZAQe2elFPmk3Jkt6GjJjuozQJFlsX6ZA4BwLDjYCpYivgPELZApAo6LMCHdktPeGgkrbf8OZCW1aFajBdvIPeSigZD':
             return challenge, 200
         return 'Token inválido', 403
 
