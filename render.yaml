@@ -1,7 +1,15 @@
 services:
   - type: web
-    name: whatsapp-webhook
+    name: whatsapp-ia
     env: python
-    buildCommand: ""
+    buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
-    plan: free
+    envVars:
+      - key: VERIFY_TOKEN
+        value: meu_token_seguro
+      - key: WHATSAPP_TOKEN
+        value: EAA...
+      - key: WHATSAPP_ID
+        value: 123456...
+      - key: OPENAI_API_KEY
+        value: sk-...
