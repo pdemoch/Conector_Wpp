@@ -16,12 +16,16 @@ def responder_ia(numero, mensagem_usuario):
     enviar_mensagem(numero, resposta)
 
 def gerar_resposta_openai(prompt):
-    openai = OpenAI(api_key=OPENAI_API_KEY)
-    response = openai.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}]
-    )
-    return response.choices[0].message.content.strip()
+    try:
+        openai = OpenAI(api_key=OPENAI_API_KEY)
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"Erro ao gerar resposta da OpenAI: {e}")
+        return "Desculpe, não consegui processar sua mensagem no momento."
 
 def enviar_mensagem(numero, texto):
     url = f"https://graph.facebook.com/v18.0/{WHATSAPP_ID}/messages"
@@ -35,4 +39,6 @@ def enviar_mensagem(numero, texto):
         "type": "text",
         "text": {"body": texto}
     }
-    requests.post(url, headers=headers, json=payload)
+    response = requests.post(url, headers=headers, json=payload)
+    print(f"Status envio: {response.status_code}")
+    print(f"Resposta: {response.text}")
