@@ -18,7 +18,7 @@ def responder_ia(numero, mensagem_usuario):
 def gerar_resposta_openai(prompt):
     openai = OpenAI(api_key=OPENAI_API_KEY)
     response = openai.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}]
     )
     return response.choices[0].message.content.strip()
