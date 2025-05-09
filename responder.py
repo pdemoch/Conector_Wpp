@@ -28,18 +28,21 @@ def receber_mensagem():
     try:
         value = data["entry"][0]["changes"][0]["value"]
 
-        # Só processa se a mensagem existir
         if "messages" in value:
             mensagens = value["messages"]
             for msg in mensagens:
-                numero = msg["from"]
-                texto = msg["text"]["body"]
-                print(f"📩 Mensagem recebida de {numero}: {texto}")
-                responder_ia(numero, texto)
+                numero = msg.get("from")
+                texto = msg.get("text", {}).get("body")
+
+                if numero and texto:
+                    print(f"📩 Mensagem recebida de {numero}: {texto}")
+                    responder_ia(numero, texto)
+                else:
+                    print("⚠️ Mensagem recebida sem conteúdo de texto.")
         else:
-            print("ℹ️ Webhook recebido, mas sem mensagens. Pode ser delivery/read.")
+            print("ℹ️ Evento recebido sem mensagens (pode ser delivery, leitura etc.)")
     except Exception as e:
-        print(f"❌ Erro ao processar: {e}")
+        print(f"❌ Erro ao processar evento: {e}")
 
     return "OK", 200
 
