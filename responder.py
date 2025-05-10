@@ -12,7 +12,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 @app.route("/webhook", methods=["GET"])
 def verificar_webhook():
-    verify_token = "meu_token_seguro"  # Troque se for diferente no painel do Meta
+    verify_token = "meu_token_seguro" 
     token = request.args.get("hub.verify_token")
     challenge = request.args.get("hub.challenge")
     if token == verify_token:
@@ -53,7 +53,7 @@ def receber_mensagem():
     return "OK", 200
 
 def responder_ia(numero, mensagem_usuario):
-    prompt = f"O cliente disse: {mensagem_usuario}. Responda de forma educada e amigável como se fosse de um estúdio de tatuagem moderno."
+    prompt = f"O cliente disse: {mensagem_usuario}. Responda que esse numero agora é da phD IA Technology, empresa voltada para o desenvolvimento de aplicações de IA para WhatsApp, automação de processos e analise e engenharia de dados, a partir de R$500,00 mensais fale para o usuario tambem que se ele quiser falar direto com o Philipe, chamar no instagram @ph_democh"
     resposta = gerar_resposta_openai(prompt)
     enviar_mensagem(numero, resposta)
 
